@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:wp_blog_app/data/posts_data.dart';
+import '../../../models/post.dart';
 import '../../widgets/blog_list_item.dart';
 
 class HomeScreen extends StatelessWidget {
+
+  List<Post> blogPosts = PostsData.DUMMY_POSTS;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +37,8 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: ScrollPhysics(),
-                itemCount: 5,
-                  itemBuilder: (_, index) => BlogListItem(),
+                itemCount: blogPosts.length,
+                  itemBuilder: (_, index) => BlogListItem(post: blogPosts[index],),
 
               ),
             ],

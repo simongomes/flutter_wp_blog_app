@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:wp_blog_app/models/post.dart';
 
 class BlogListItem extends StatelessWidget {
+  final Post post;
   const BlogListItem({
+    this.post,
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    DateTime date = DateTime.parse(post.date);
+    String postDate = DateFormat.MMMMd().format(date) + ', ' + DateFormat.y().format(date);
+
     return Container(
       margin: EdgeInsets.only(bottom: 20),
       width: double.infinity,
@@ -31,19 +39,23 @@ class BlogListItem extends StatelessWidget {
                           'Business',
                           style: Theme.of(context).textTheme.bodyText1
                       ),
-                      Text(
-                        'How netflix brings safer & faster streaming...',
-                        style: Theme.of(context).textTheme.headline3,
-                        softWrap: true,
+                      Container(
+                        width: double.infinity,
+                        height: 50,
+                        child: Text(
+                          post.title,
+                          style: Theme.of(context).textTheme.headline3,
+                          softWrap: true,
+                        ),
                       ),
                       SizedBox(height: 10,),
                       Text(
-                        'Kevin Peter',
+                        post.author,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       SizedBox(height: 10,),
                       Text(
-                        'April 25, 2020  •  5 min read',
+                        '$postDate  •  5 min read',
                         style: Theme.of(context).textTheme.subtitle2,
                       )
                     ],
